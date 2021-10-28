@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: 'api-getaway'
+  cloud:
+    gateway:
+      routes:
+        - id: structure
+          uri: lb://structure
+          predicates:
+            - Path= ${STRUCTURE_MS_PATHS}
+        - id: courrier
+          uri: lb://courrier
+          predicates:
+            - Path= ${COURRIER_MS_PATHS}
