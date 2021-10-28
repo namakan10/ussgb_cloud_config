@@ -5,10 +5,26 @@ spring:
     gateway:
       routes:
         - id: structure
-          uri: lb://structure
+          uri: lb://microservice-structure
           predicates:
             - Path= ${STRUCTURE_MS_PATHS}
         - id: courrier
-          uri: lb://courrier
+          uri: lb://microservice-courrier
           predicates:
             - Path= ${COURRIER_MS_PATHS}
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: *
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_URL}
